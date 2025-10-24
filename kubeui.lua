@@ -134,7 +134,27 @@ local function drawRect(box, x, y, w, h, col)
     end
 end
 
+local fontMode = "pixel" -- "pixel" or "cc"
+
+function gui.setFont(mode)
+    if mode == "pixel" or mode == "cc" then
+        fontMode = mode
+    else
+        error("Invalid font mode: " .. tostring(mode))
+    end
+end
+
 local function drawText(box, x, y, text, textCol, scale)
+    if fontMode == "cc" then
+        -- Use ComputerCraft font directly
+        term.setCursorPos(x, y)
+        term.setTextColor(textCol or colors.white)
+        term.write(text)
+        
+        return #text * 6  -- approximate width
+    else
+
+    -- Default PIXEL FONT
     scale = scale or 1
     local chars = {
         A={{1,1,1},{1,0,1},{1,1,1},{1,0,1},{1,0,1}},
@@ -175,10 +195,10 @@ local function drawText(box, x, y, text, textCol, scale)
         ["8"]={{0,1,0},{1,0,1},{0,1,0},{1,0,1},{0,1,0}},
         ["9"]={{0,1,0},{1,0,1},{0,1,1},{0,0,1},{1,1,0}},
     }
-    
+
     local cx = x
     for i = 1, #text do
-        local c = text:sub(i,i):upper()
+        local c = text:sub(i, i):upper()
         local char = chars[c]
         if char then
             for row = 1, 5 do
@@ -200,6 +220,7 @@ local function drawText(box, x, y, text, textCol, scale)
         cx = cx + 4 * scale
     end
     return cx - x
+end
 end
 
 -- Button Component
