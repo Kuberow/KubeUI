@@ -227,17 +227,20 @@ end
 -- Log System
 function log(type, color, text)
     if logbool then
+        term.redirect(logmon)
         local tmp = term.getTextColor()
         term.setTextColor(color)
         print("["..type.."]", " ", text)
         term.setTextColor(tmp)
         local tmp = nil
+        term.redirect(term.native)
     end
 end
 
 -- Log Toggle
 function gui.log(screenormon, trueorfalse)
     local logbool = trueorfalse
+    local logmon = screenormon
 end
 
 -- Button Component
