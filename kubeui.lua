@@ -223,6 +223,22 @@ local function drawText(box, x, y, text, textCol, scale)
 end
 end
 
+-- Log System
+function log(type, color, text)
+    if logbool then
+        local tmp = term.getTextColor()
+        term.setTextColor(color)
+        print("["..type.."]", " ", text)
+        term.setTextColor(tmp)
+        local tmp = nil
+    end
+end
+
+-- Log Toggle
+function gui.log(screenormon, trueorfalse)
+    local logbool = trueorfalse
+end
+
 -- Button Component
 function gui.Button(x, y, w, h, text, callback)
     local btn = {
