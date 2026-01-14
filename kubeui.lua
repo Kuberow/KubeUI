@@ -139,6 +139,7 @@ local fontMode = "pixel" -- "pixel" or "cc"
 function gui.setFont(mode)
     if mode == "pixel" or mode == "cc" then
         fontMode = mode
+        log("CODE", colors.green, "Changed font to "..mode..".")
     else
         error("Invalid font mode: " .. tostring(mode))
     end
@@ -278,7 +279,7 @@ function gui.Button(x, y, w, h, text, callback)
     function btn:handleMouse(mx, my)
         self.hovered = isInBounds(mx, my, self.x, self.y, self.w, self.h) and self.enabled
     end
-    
+    log("CODE", colors.green, "Added a Button.")
     return btn
 end
 
@@ -321,7 +322,7 @@ function gui.Panel(x, y, w, h, color)
             end
         end
     end
-    
+    log("CODE", colors.green, "Added a panel.")
     return panel
 end
 
@@ -342,7 +343,7 @@ function gui.Label(x, y, text, color)
     function label:setText(text)
         self.text = text
     end
-    
+    log("CODE", colors.green, "Added a label.")
     return label
 end
 
@@ -380,7 +381,7 @@ function gui.Checkbox(x, y, label, checked, callback)
         end
         return false
     end
-    
+    log("CODE", colors.green, "Added a Checkbox")
     return cb
 end
 
@@ -433,7 +434,7 @@ function gui.Slider(x, y, w, min, max, value, callback)
         self.value = self.min + percent * (self.max - self.min)
         self:callback(self.value)
     end
-    
+    log("CODE", colors.green, "Added a Slider.")
     return slider
 end
 
